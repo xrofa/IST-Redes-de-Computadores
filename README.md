@@ -13,6 +13,6 @@ Código de Suporte Disponibilizados Pelo Corpo Docente: ...<br />
 Testes Publicos Incluidos: ...<br />
 
 ## Autor:
-[Christian Sousa](https://github.com/xrofa)
-[Miguel Figueira](https://github.com/)
-[André Rodrigues](https://github.com/)
+[Christian Sousa](https://github.com/xrofa)<br />
+[Miguel Figueira](https://github.com/)<br />
+[André Rodrigues](https://github.com/)<br />
