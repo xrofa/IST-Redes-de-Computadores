@@ -7,6 +7,13 @@ The goal of this project is to develop a simple networking application that allo
 
 ## Ficheiros:
 
+Para compilar: javac *.java<br />
+Para correr o Central Server: java CS 58011<br />
+Para correr o Working Server: java WS 58011<br />
+Para correr o User: java User [IP-que-aparece-quando-se-corre-o-CS]<br />
+
+## Ficheiros:
+
 Pasta Enunciado: RC Distributed Processing.pdf<br />
 Código Realizado: Client e Server.java<br />
 Código de Suporte Disponibilizados Pelo Corpo Docente: ...<br />
