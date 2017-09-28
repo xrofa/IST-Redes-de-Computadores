@@ -23,6 +23,7 @@ class TCPServer implements Runnable {
     
     try {
         ip = InetAddress.getLocalHost();
+        System.out.println("\n---CENTRAL SERVER---");
         System.out.println("Current IP address : " + ip.getHostAddress());
     }
     catch (UnknownHostException e) {
@@ -46,7 +47,7 @@ class TCPServer implements Runnable {
         getIP();
 		
         System.out.println( "Server has been started on port: " + port );	
-		
+		System.out.println("---CENTRAL SERVER---");
         while ( true ) {
             try {
                 clientSocket = echoServer.accept();
@@ -81,7 +82,7 @@ class UDPServer implements Runnable {
     //simple function to echo data to terminal
     public static void echo(String msg)
     {
-        System.out.println("---WORKING SERVER---");
+        System.out.println("\n---WORKING SERVER---");
         System.out.println(msg);
         System.out.println("---WORKING SERVER---");
     }
@@ -139,8 +140,10 @@ class ServerConnection implements Runnable {
 		this.clientSocket = clientSocket;
 		this.id = id;
 		this.server = server;
+        System.out.println("\n---CENTRAL SERVER---");
 		System.out.println("Connection " + id + " established");
         System.out.println("ClientSocket: " + clientSocket);
+        System.out.println("---CENTRAL SERVER---");
         //System.out.println("From IP: " + clientSocket.getInetAddress() );
           
 		try {
@@ -166,7 +169,7 @@ class ServerConnection implements Runnable {
 			StringTokenizer str = new StringTokenizer(line);
 			nrTokens = str.countTokens();
 			//System.out.println( "Received -" + line + "- from Connection " + id + "." );
-            System.out.println("---CENTRAL SERVER---");
+            System.out.println("\n---CENTRAL SERVER---");
             System.out.println("Received the command -"+line+"- from "+ clientSocket.getInetAddress() + ":"+ clientSocket.getLocalPort());
             System.out.println("---CENTRAL SERVER---");
 			//System.out.println( "Number of tokens: " + nrTokens + "\nToken 1: -" + str.nextToken() + "-." );
@@ -206,9 +209,16 @@ class ServerConnection implements Runnable {
 }
 
 public class CS {
+    
+    private static final int NUMERO_GRUPO = 7;
+    
   public static void main (String[] args) {
     
-    int port = Integer.parseInt(args[0]); //recebe a porta para criar os servidores
+    int port = 58000 + NUMERO_GRUPO;
+      
+    if(args.length == 2 && args[0].equals("-p")){
+        port = Integer.parseInt(args[1]);
+    }
       
       
     Thread tcp = new Thread(new TCPServer(port));

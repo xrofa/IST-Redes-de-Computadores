@@ -7,16 +7,29 @@ public class User extends Thread {
 	static Socket clientSocket = null;  
 	static DataOutputStream os = null;
 	static BufferedReader is = null;
-
+    
+    private static final int NUMERO_GRUPO = 7;
+    
     public static void main(String[] args) {
 	
-        int port;
-        String hostname = args[0];
+        int port = 58000+NUMERO_GRUPO;
+        String hostname = "localhost";
         
-        if(args.length == 1 ){
-            port = 58000 + 32;
-        } else{
-            port = Integer.parseInt(args[1]);
+        
+        if(args.length == 4 && args[0].equals("-n") && args[2].equals("-p")){
+            hostname = args[1];
+            port = Integer.parseInt(args[3]);
+            System.out.println("Caso1:hostname: "+hostname);
+            System.out.println("Caso1:port: "+port);
+        }
+        if(args.length == 2 && args[0].equals("-n")){
+            hostname = args[1];
+            System.out.println("Caso2:hostname: "+hostname);
+            System.out.println("Caso2:port: "+port);
+        }
+        else{
+            System.err.println("Wrong arguments.");
+            return;
         }
         
         System.out.println("Input Port: " + port);
