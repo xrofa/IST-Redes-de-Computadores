@@ -27,12 +27,9 @@ public class User extends Thread {
             System.out.println("Caso2:hostname: "+hostname);
             System.out.println("Caso2:port: "+port);
         }
-        else{
-            System.err.println("Wrong arguments.");
-            return;
-        }
         
-        System.out.println("Input Port: " + port);
+        
+        //System.out.println("Input Port: " + port);
         
 ///// CREATING THE SOCKET ///// 
         try {
@@ -88,6 +85,7 @@ public class User extends Thread {
 ///// INITIALIZING CLIENT - READ SIDE /////	
 		try {
 	  	  while ( true ) {
+            System.out.println(">");
 			String responseLine = is.readLine();
 			if (responseLine.equals("exit")) break;
 			System.out.print("Received Message from connection: " + responseLine + "\n");
