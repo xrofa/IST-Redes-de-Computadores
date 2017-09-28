@@ -5,7 +5,7 @@ Instituto Superior Técnico 2017/2018
 
 The goal of this project is to develop a simple networking application that allows users to submit a text file to a central server (CS) and request some predefined, well-known operations, to be performed on the file.<br />
 
-## Ficheiros:
+## Compilação e Utilização:
 
 Para compilar: javac *.java<br />
 Para correr o Central Server: java CS 58011<br />
