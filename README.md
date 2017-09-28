@@ -10,7 +10,7 @@ The goal of this project is to develop a simple networking application that allo
 Para compilar: javac *.java<br />
 Para correr o Central Server: java CS 58011<br />
 Para correr o Working Server: java WS 58011<br />
-Para correr o User: java User [IP-que-aparece-quando-se-corre-o-CS]<br />
+Para correr o User: java User [IP-que-aparece-quando-se-corre-o-CS] 58011<br />
 
 ## Ficheiros:
 
