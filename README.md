@@ -14,5 +14,5 @@ Testes Publicos Incluidos: ...<br />
 
 ## Autor:
 [Christian Sousa](https://github.com/xrofa)<br />
-[Miguel Figueira](https://github.com/)<br />
+[Miguel Figueira](https://github.com/miguelblcfigueira)<br />
 [André Rodrigues](https://github.com/)<br />
