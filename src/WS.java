@@ -1,14 +1,27 @@
+// java WS PTC1...PTCn -p WSport -n CSname -e CSport
+// WCT = Word Count
+// FLW = Find Longets Word
+// UPP = Convert Text To Upper Case
+// LOW = Convert Text to Lower Case
 
 import java.io.*;
 import java.net.*;
  
 public class WS
 {
+    private static final int NUMERO_GRUPO = 7;
+    
     public static void main(String args[])
     {
         DatagramSocket sock = null;
+        
+        int wsport = 59000;
+        String CSname = "localhost";
         int port = Integer.parseInt(args[0]);
         String s;
+        
+        
+        
          
         BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
          

@@ -3,19 +3,19 @@ import java.io.*;
 import java.net.*;
 
 public class User extends Thread {
-	
+	private static final int NUMERO_GRUPO = 7;
+    
 	static Socket clientSocket = null;  
 	static DataOutputStream os = null;
 	static BufferedReader is = null;
     
-    private static final int NUMERO_GRUPO = 7;
+    static int port = 58000+NUMERO_GRUPO;
+    static String hostname = "localhost";
     
+        
     public static void main(String[] args) {
 	
-        int port = 58000+NUMERO_GRUPO;
-        String hostname = "localhost";
-        
-        
+        //TODO
         if(args.length == 4 && args[0].equals("-n") && args[2].equals("-p")){
             hostname = args[1];
             port = Integer.parseInt(args[3]);
@@ -32,30 +32,7 @@ public class User extends Thread {
             //System.out.println("Caso2:hostname: "+hostname);
             System.out.println("Caso2:port: "+port);
         }
-        
-        
-        //System.out.println("Input Port: " + port);
-        
-///// CREATING THE SOCKET ///// 
-        try {
-            clientSocket = new Socket(hostname, port);
-            os = new DataOutputStream(clientSocket.getOutputStream()); // Output
-            System.out.println("is: " +is);
-            is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); // Input
-            System.out.println("is: " +is);
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: " + hostname);
-        } catch (IOException e) {
-            System.err.println("Couldn't connect to: " + hostname  + " with port: " + port);
-        } catch (IllegalArgumentException e) {
-            System.err.println("Error: Please use a valid host and port.");
-	    return;
-        }
-	
-        if (clientSocket == null || os == null || is == null) {
-            System.err.println( "Perhaps the server is not running?" );
-            return;
-	       }
+           
 
 ///// INITIALIZING CLIENT - WRITE SIDE /////	
 	
@@ -84,21 +61,47 @@ public class User extends Thread {
             
         } catch (UnknownHostException e) {
             System.err.println("Trying to connect to unknown host: " + e);
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            // TODO
+        }
     }  
 
 	
     public void run(){
 ///// INITIALIZING CLIENT - READ SIDE /////	
-		try {
-	  	  while ( true ) {
-            //System.out.println(">");
-			String responseLine = is.readLine();
-			if (responseLine.equals("exit")) break;
-			System.out.print("Received Message from connection: " + responseLine + "\n");
-		    }
-		}  catch (IOException e) {
-		    System.err.println("Connection with server closed.");
+        try {
+            while ( true ) {
+                ///// CREATING THE SOCKET ///// 
+                try {
+                    clientSocket = new Socket(hostname, port);
+                    os = new DataOutputStream(clientSocket.getOutputStream()); // Output
+                    is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())); // Input
+                } catch (UnknownHostException e) {
+                    System.err.println("Don't know about host: " + hostname);
+                } catch (IOException e) {
+                    System.err.println("Couldn't connect to: " + hostname  + " with port: " + port);
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Error: Please use a valid host and port.");
+                    return;
+                }
+                
+                if (clientSocket == null || os == null || is == null) {
+                    System.err.println( "Perhaps the server is not running?" );
+                    return;
+                }
+                
+                String responseLine = is.readLine();
+                os.close();
+                is.close();
+                clientSocket.close(); 
+                
+                if (responseLine.equals("exit")) break;
+                
+                System.out.print("Received Message from connection: " + responseLine + "\n");
+            }
+            
+        } catch (IOException e) {
+            System.err.println("Connection with server closed.");
             return;
 		}
 		  catch (NullPointerException e) {
