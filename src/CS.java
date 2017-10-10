@@ -165,7 +165,9 @@ class ServerConnection implements Runnable {
        	     while (true) {
 			response = "Invalid Command";
 			
-       	       		line = is.readLine();
+       	    line = is.readLine();
+            String[] lineRead = line.split(" ");
+            System.out.println("Line: " + line);
 			StringTokenizer str = new StringTokenizer(line);
 			nrTokens = str.countTokens();
 			//System.out.println( "Received -" + line + "- from Connection " + id + "." );

@@ -1,6 +1,7 @@
 // java User tejo.tecnico.ulisboa.pt 58011
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 public class User extends Thread {
 	private static final int NUMERO_GRUPO = 7;
@@ -49,15 +50,44 @@ public class User extends Thread {
             while ( true ) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                 String keyboardInput = br.readLine();
-
-                if (keyboardInput.equals("list")) os.writeBytes("LST\n");
-                if (keyboardInput.equals("request")); //TODO
-                if (keyboardInput.equals("exit")) break; //break;
+                String[] input_command = keyboardInput.split(" ");
+                //System.out.println("input_command.length: " + input_command.length + "First: " + input_command[0]);
+                String command = input_command[0];
+                
+                if (command.equals("list")){
+                    os.writeBytes("LST\n");
+                    os.flush();
+                }
+                
+                if (command.equals("request")){
+                    //System.out.println("Accepted connection : " + socket);
+                    
+                    File transferFile = new File (input_command[input_command.length - 1]);
+                
+                    System.out.println("FileSize: "+(int)transferFile.length());
+                    
+                    byte [] bytearray = new byte [(int)transferFile.length()];
+                    FileInputStream fin = new FileInputStream(transferFile);
+                    BufferedInputStream bin = new BufferedInputStream(fin);
+                    bin.read(bytearray,0,bytearray.length);
+                    System.out.println("Sending Files...");
+                    os.writeBytes("REQ WTF\n");
+                    //esperas pela resposta do CS
+                    os.writeBytes(bytearray.length); // envia primeiro o tamanho dos bytes
+                    os.write(bytearray,0,bytearray.length); // envia a data
+                    os.flush();
+                    System.out.println("File transfer complete"); 
+                    
+                }
+                
+                if (command.equals("exit")){
+                    break;
+                }
             }
             
-            os.close();
-            is.close();
-            clientSocket.close(); 
+         os.close();
+           is.close();
+           clientSocket.close(); 
             
         } catch (UnknownHostException e) {
             System.err.println("Trying to connect to unknown host: " + e);

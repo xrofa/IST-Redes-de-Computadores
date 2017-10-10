@@ -16,9 +16,16 @@ public class WS
         DatagramSocket sock = null;
         
         int wsport = 59000;
-        String CSname = "localhost";
+        String CSname = args[1];
         int port = Integer.parseInt(args[0]);
         String s;
+        boolean FLW = false;
+        
+        if(args[1].equals("FLW")){
+            System.out.println("FLW: " + FLW);
+            FLW = true;
+            System.out.println("FLW: " + FLW);
+        }
         
         
         
@@ -29,7 +36,7 @@ public class WS
         {
             sock = new DatagramSocket();
              
-            InetAddress host = InetAddress.getByName("localhost");
+            InetAddress host = InetAddress.getByName(CSname);
              
             while(true)
             {
